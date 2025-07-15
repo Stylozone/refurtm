@@ -45,7 +45,7 @@
     "postcss",
     "vue",
     "tailwindcss"
-  ],  
+  ],
   "files.associations": {
     "*.css": "tailwindcss"
   },
