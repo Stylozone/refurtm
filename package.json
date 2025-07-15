@@ -22,7 +22,7 @@
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "eslint-plugin-format": "catalog:",
-    "globals": "^16.3.0",
+    "globals": "catalog:",
     "lint-staged": "catalog:",
     "simple-git-hooks": "catalog:",
     "turbo": "catalog:",
