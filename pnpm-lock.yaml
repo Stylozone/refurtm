@@ -15,6 +15,9 @@ catalogs:
     '@phaicom/eslint-config':
       specifier: ^0.3.5
       version: 0.3.5
+    '@types/node':
+      specifier: ^22.16.4
+      version: 22.16.4
     eslint:
       specifier: ^9.31.0
       version: 9.31.0
@@ -24,6 +27,9 @@ catalogs:
     eslint-plugin-format:
       specifier: ^1.0.1
       version: 1.0.1
+    globals:
+      specifier: ^16.3.0
+      version: 16.3.0
     lint-staged:
       specifier: ^16.1.2
       version: 16.1.2
@@ -60,7 +66,7 @@ importers:
         specifier: 'catalog:'
         version: 1.0.1(eslint@9.31.0(jiti@2.4.2))
       globals:
-        specifier: ^16.3.0
+        specifier: 'catalog:'
         version: 16.3.0
       lint-staged:
         specifier: 'catalog:'
@@ -115,7 +121,7 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0
       '@types/node':
-        specifier: ^22.16.4
+        specifier: 'catalog:'
         version: 22.16.4
       '@types/supertest':
         specifier: ^6.0.3
@@ -2178,8 +2184,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.183:
-    resolution: {integrity: sha512-vCrDBYjQCAEefWGjlK3EpoSKfKbT10pR4XXPdn65q7snuNOZnthoVpBfZPykmDapOKfoD+MMIPG8ZjKyyc9oHA==}
+  electron-to-chromium@1.5.184:
+    resolution: {integrity: sha512-zlaUk/wwnR/27FHNarzOtMgfxD1Q0/2Aby7PnURumQTal7yauqQ3c2HHcG/pjLFTvF3AWv44kMWyArVlfHeDlw==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -5929,7 +5935,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 22.16.4
+      '@types/node': 24.0.14
 
   '@types/cookiejar@2.1.5': {}
 
@@ -6599,7 +6605,7 @@ snapshots:
   browserslist@4.25.1:
     dependencies:
       caniuse-lite: 1.0.30001727
-      electron-to-chromium: 1.5.183
+      electron-to-chromium: 1.5.184
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
@@ -6922,7 +6928,7 @@ snapshots:
     dependencies:
       jake: 10.9.2
 
-  electron-to-chromium@1.5.183: {}
+  electron-to-chromium@1.5.184: {}
 
   emittery@0.13.1: {}
 
