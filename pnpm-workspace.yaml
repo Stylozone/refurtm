@@ -1,0 +1,24 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  '@commitlint/cli': ^19.8.1
+  '@commitlint/config-conventional': ^19.8.1
+  '@nuxt/fonts': 0.11.4
+  '@nuxt/icon': 1.15.0
+  '@nuxt/image': 1.10.0
+  '@nuxt/ui': 3.2.0
+  '@phaicom/eslint-config': ^0.3.5
+  '@tailwindcss/vite': ^4.1.11
+  eslint: ^9.31.0
+  eslint-plugin-better-tailwindcss: ^3.6.1
+  eslint-plugin-format: ^1.0.1
+  lint-staged: ^16.1.2
+  nuxt: ^3.17.7
+  simple-git-hooks: ^2.13.0
+  tailwindcss: ^4.1.11
+  turbo: ^2.5.4
+  typescript: ^5.8.3
+  vue: ^3.5.17
+  vue-router: ^4.5.1
