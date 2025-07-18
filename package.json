@@ -13,12 +13,16 @@
     "test": "turbo run test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix --cache",
-    "postinstall": "npx simple-git-hooks"
+    "postinstall": "npx simple-git-hooks",
+    "db:up": "docker compose -f infra/docker-compose.yml up -d",
+    "db:down": "docker compose -f infra/docker-compose.yml down",
+    "db:restart": "npm run dev:down && npm run dev:up"
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@phaicom/eslint-config": "catalog:",
+    "dotenv": "^17.2.0",
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "eslint-plugin-format": "catalog:",
