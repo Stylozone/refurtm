@@ -1,0 +1,14 @@
+{
+  "name": "@refurtm/proto",
+  "version": "0.0.1",
+  "private": true,
+  "files": [
+    "*.proto"
+  ],
+  "description": "Refurbished Tech Marketplace.",
+  "author": "Reawpai Chunsoi <reawpai.chunsoi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "protoc ..."
+  }
+}

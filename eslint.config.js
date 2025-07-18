@@ -10,6 +10,9 @@ configs(
       html: true,
       css: true,
     },
+    rules: {
+      'eslint-comments/no-unlimited-disable': 'off',
+    },
   },
   {
     files: ['./apps/core-api/**/*.{js,ts}'],
