@@ -12,7 +12,7 @@ configs(
     },
   },
   {
-    files: ['./apps/api/**/*.{js,ts}'],
+    files: ['./apps/core-api/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -21,7 +21,7 @@ configs(
       sourceType: 'commonjs',
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: join(import.meta.dirname, './apps/api'),
+        tsconfigRootDir: join(import.meta.dirname, './apps/core-api'),
       },
     },
     rules: {

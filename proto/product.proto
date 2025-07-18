@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/Stylozone/refurtm/proto/productpb";
+
+// --- Product Message ---
+
+message Product {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  float price = 4;
+  string image_url = 5;
+  string condition = 6; // e.g., "Excellent", "Good", "Fair"
+  string category = 7;
+  string slug = 8;
+}
+
+// --- Requests & Responses ---
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductBySlugRequest {
+  string slug = 1;
+}
+
+message ProductResponse {
+  Product product = 1;
+}
+
+message ListProductsRequest {
+  string category = 1;
+  string search = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+message ProductList {
+  repeated Product products = 1;
+  int32 total = 2;
+}
+
+// --- gRPC Service ---
+
+service ProductService {
+  rpc GetProduct(GetProductRequest) returns (ProductResponse);
+  rpc GetProductBySlug(GetProductBySlugRequest) returns (ProductResponse);
+  rpc ListProducts(ListProductsRequest) returns (ProductList);
+}
