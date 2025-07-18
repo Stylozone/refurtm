@@ -2,13 +2,14 @@
   "name": "@refurtm/proto",
   "version": "0.0.1",
   "private": true,
-  "files": [
-    "*.proto"
-  ],
+  "packageManager": "pnpm@10.13.1",
   "description": "Refurbished Tech Marketplace.",
   "author": "Reawpai Chunsoi <reawpai.chunsoi@gmail.com>",
   "license": "MIT",
+  "files": [
+    "*.proto"
+  ],
   "scripts": {
-    "build": "protoc ..."
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

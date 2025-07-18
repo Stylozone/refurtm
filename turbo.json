@@ -20,6 +20,12 @@
       "dependsOn": [
         "^test"
       ]
+    },
+    "gen:prisma": {
+      "cache": false,
+      "dependsOn": [
+        "^gen:prisma"
+      ]
     }
   }
 }

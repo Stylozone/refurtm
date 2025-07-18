@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
+import { GrpcMethod } from '@nestjs/microservices'
 import { PrismaClient } from '@prisma/client'
 import { GetProductBySlugRequest, GetProductRequest, ListProductsRequest, ProductList, ProductResponse, ProductServiceController } from './product'
 
@@ -6,6 +7,7 @@ import { GetProductBySlugRequest, GetProductRequest, ListProductsRequest, Produc
 export class ProductServiceImpl implements ProductServiceController {
   private prisma = new PrismaClient()
 
+  @GrpcMethod('ProductService', 'GetProduct')
   async getProduct({ id }: GetProductRequest): Promise<ProductResponse> {
     const product = await this.prisma.product.findUnique({ where: { id } })
     if (!product) {
