@@ -21,10 +21,16 @@
         "^test"
       ]
     },
-    "gen:prisma": {
+    "db:gen": {
       "cache": false,
       "dependsOn": [
-        "^gen:prisma"
+        "^db:gen"
+      ]
+    },
+    "db:seed": {
+      "cache": false,
+      "dependsOn": [
+        "^db:seed"
       ]
     }
   }
