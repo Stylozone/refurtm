@@ -3,7 +3,7 @@ import { dirname } from 'node:path'
 import { globSync } from 'glob'
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
+export default defineConfig([{
   entry: ['gen/index.ts'], // or just 'src/product.ts' if no index
   outDir: 'dist',
   format: ['esm', 'cjs'],
@@ -24,4 +24,11 @@ export default defineConfig({
       copyFileSync(file, to)
     }
   },
-})
+}, {
+  entry: ['scripts/gen-graphql-models.ts'],
+  outDir: 'dist/scripts',
+  format: ['cjs'],
+  dts: false,
+  clean: false,
+  target: 'node18',
+}])
