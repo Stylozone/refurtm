@@ -11,6 +11,7 @@
     "dev": "turbo run dev",
     "dev:core": "pnpm --filter @refurtm/core-api dev",
     "dev:bff": "pnpm --filter @refurtm/bff dev",
+    "dev:web": "pnpm --filter @refurtm/web dev",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "eslint .",
