@@ -2,6 +2,7 @@ import type { MicroserviceOptions } from '@nestjs/microservices'
 import { ReflectionService } from '@grpc/reflection'
 import { NestFactory } from '@nestjs/core'
 import { Transport } from '@nestjs/microservices'
+import { protoPath as healthCheckProtoPath, HealthImplementation } from 'grpc-health-check'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
@@ -9,10 +10,19 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: 'product',
-      protoPath: require.resolve('@refurtm/proto/product.proto'),
+      protoPath: [
+        healthCheckProtoPath,
+        require.resolve('@refurtm/proto/product.proto'),
+      ],
       url: '0.0.0.0:50051',
       onLoadPackageDefinition: (pkg, server) => {
         new ReflectionService(pkg).addToServer(server)
+        const healthImpl = new HealthImplementation({
+          '': 'UNKNOWN',
+        })
+
+        healthImpl.addToServer(server)
+        healthImpl.setStatus('', 'SERVING')
       },
     },
   })
