@@ -1,6 +1,6 @@
 import { Controller, NotFoundException } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import {
   GetProductBySlugRequest,
   GetProductRequest,
@@ -39,7 +39,7 @@ export class ProductController implements ProductServiceController {
     page = 1,
     limit = 10,
   }: ListProductsRequest): Promise<ProductList> {
-    const where: any = {}
+    const where: Prisma.ProductWhereInput = {}
 
     if (search) {
       where.title = {
