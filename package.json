@@ -18,7 +18,10 @@
     "db:down": "docker compose -f infra/docker-compose.yml down",
     "db:restart": "npm run dev:down && npm run dev:up",
     "db:gen": "turbo run db:gen",
-    "db:seed": "turbo run db:seed"
+    "db:seed": "turbo run db:seed",
+    "pt": "pnpm pt:gen && pnpm pt:build",
+    "pt:gen": "pnpm --filter @refurtm/proto generate",
+    "pt:build": "pnpm --filter @refurtm/proto build"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.13.4",

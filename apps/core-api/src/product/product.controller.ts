@@ -8,7 +8,7 @@ import {
   ProductList,
   ProductResponse,
   ProductServiceController,
-} from './product'
+} from '@refurtm/proto'
 
 @Controller()
 export class ProductController implements ProductServiceController {

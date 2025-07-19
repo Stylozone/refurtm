@@ -12,7 +12,7 @@ async function bootstrap() {
       package: 'product',
       protoPath: [
         healthCheckProtoPath,
-        require.resolve('@refurtm/proto/product.proto'),
+        require.resolve('@refurtm/proto/dist/product.proto'),
       ],
       url: '0.0.0.0:50051',
       onLoadPackageDefinition: (pkg, server) => {
