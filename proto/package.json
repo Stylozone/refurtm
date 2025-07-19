@@ -7,17 +7,17 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "dist/graphql-models",
     "src/**/*.proto"
   ],
   "scripts": {
     "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=gen --ts_proto_opt=nestJs=true,outputServices=grpc-js,env=node --proto_path=src src/*.proto",
-    "build": "pnpm generate && tsup && pnpm gen:gql-models",
-    "gen:gql-models": "node dist/scripts/gen-graphql-models.js"
+    "build": "pnpm generate && pnpm gen:gql-models && tsup",
+    "gen:gql-models": "tsx scripts/gen-graphql-models.ts"
   },
   "dependencies": {
     "@nestjs/graphql": "^13.1.0",
-    "@refurtm/tsconfig": "workspace:^"
+    "@refurtm/tsconfig": "workspace:^",
+    "tsx": "^4.20.3"
   },
   "devDependencies": {
     "ts-proto": "catalog:",

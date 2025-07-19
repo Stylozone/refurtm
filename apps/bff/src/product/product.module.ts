@@ -11,7 +11,7 @@ import { ProductResolver } from './product.resolver'
         options: {
           package: 'product',
           protoPath: require.resolve('@refurtm/proto/dist/product.proto'),
-          url: 'localhost:50051',
+          url: '0.0.0.0:50051',
         },
       },
     ]),

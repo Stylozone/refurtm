@@ -3,12 +3,10 @@ import { basename, join } from 'node:path'
 import { globSync } from 'glob'
 
 const GENERATED_DIR = 'gen'
-const OUTPUT_DIR = 'dist/graphql-models'
+const OUTPUT_DIR = 'graphql'
 
-// Ensure output folder exists
 mkdirSync(OUTPUT_DIR, { recursive: true })
 
-// Read all generated .ts files (skip index if any)
 const files = globSync(`${GENERATED_DIR}/*.ts`).filter((f) => !f.endsWith('index.ts'))
 
 const indexExports: string[] = []
@@ -18,29 +16,53 @@ for (const file of files) {
   const filename = basename(file)
   const outputFile = join(OUTPUT_DIR, filename)
 
-  let output = `import { ObjectType, Field, Int, Float } from '@nestjs/graphql'\n\n`
+  const usedImports = new Set<string>()
+  const classParts: string[] = []
 
   const interfaces = [...content.matchAll(/export interface (\w+) \{([^}]+)\}/g)]
 
   for (const match of interfaces) {
     const name = match[1]
     const body = match[2]
-    output += `@ObjectType()\nexport class ${name} {\n`
+    const lines = body.split('\n').map((line) => line.trim()).filter(Boolean)
 
-    for (const line of body.split('\n')) {
-      const trimmed = line.trim()
-      if (!trimmed || trimmed.startsWith('//')) {
+    // Skip interfaces with functions
+    if (lines.some((line) => /\w+\s*\(.*\)\s*[:;]/.test(line))) {
+      console.warn(`⚠️  Skipping interface "${name}" because it contains methods`)
+      continue
+    }
+
+    usedImports.add('ObjectType')
+    let classDef = `@ObjectType()\nexport class ${name} {\n`
+
+    for (const line of lines) {
+      if (
+        line.startsWith('//')
+        || line.startsWith('/*')
+        || line.startsWith('*')
+        || line.startsWith('/**')
+      ) {
         continue
       }
 
-      const [rawKey, rawType] = trimmed.split(':').map((s) => s.trim().replace(/;$/, ''))
-      const key = rawKey
-      const type = rawType || 'string'
+      const [rawKey, rawType] = line.split(':').map((s) => s.trim().replace(/;$/, ''))
+      if (!rawKey || !rawType) {
+        continue
+      }
 
-      // Guess decorator
+      const key = rawKey
+      let type = rawType
       let gqlType = 'String'
+      let nullable = false
+
+      if (type.includes('undefined') || type.includes('null')) {
+        nullable = true
+        type = type.replace(/\s*\|\s*undefined/g, '').replace(/\s*\|\s*null/g, '').trim()
+      }
+
       if (type === 'number') {
         gqlType = 'Float'
+        usedImports.add('Float')
       }
       else if (type === 'boolean') {
         gqlType = 'Boolean'
@@ -48,31 +70,37 @@ for (const file of files) {
       else if (type === 'string') {
         gqlType = 'String'
       }
-      else if (type.startsWith('number[]')) {
-        gqlType = '[Float]'
-      }
-      else if (type.startsWith('string[]')) {
-        gqlType = '[String]'
-      }
       else if (type.endsWith('[]')) {
-        gqlType = `[${type.replace('[]', '')}]`
+        const inner = type.replace('[]', '')
+        gqlType = `[${inner}]`
       }
-      else { gqlType = type }
+      else {
+        gqlType = type
+      }
 
-      output += `  @Field(() => ${gqlType})\n`
-      output += `  ${key}: ${type};\n`
+      gqlType = gqlType.replace(/[()]/g, '')
+      usedImports.add('Field')
+
+      classDef += `  @Field(() => ${gqlType}${nullable ? ', { nullable: true }' : ''})\n`
+      classDef += `  ${key}${nullable ? '?' : '!'}: ${type};\n`
     }
 
-    output += '}\n\n'
+    classDef += '}\n\n'
+    classParts.push(classDef)
+
     const exportPath = `export * from './${filename.replace('.ts', '')}'`
     if (!indexExports.includes(exportPath)) {
       indexExports.push(exportPath)
     }
   }
 
-  writeFileSync(outputFile, output, 'utf-8')
+  const importLine
+    = usedImports.size > 0
+      ? `import { ${Array.from(usedImports).sort().join(', ')} } from '@nestjs/graphql'\n\n`
+      : ''
+
+  writeFileSync(outputFile, importLine + classParts.join(''), 'utf-8')
 }
 
-// Generate index.ts
 writeFileSync(join(OUTPUT_DIR, 'index.ts'), indexExports.join('\n'))
 console.log(`✅ GraphQL models generated in ${OUTPUT_DIR}`)

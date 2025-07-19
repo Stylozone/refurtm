@@ -24,11 +24,4 @@ export default defineConfig([{
       copyFileSync(file, to)
     }
   },
-}, {
-  entry: ['scripts/gen-graphql-models.ts'],
-  outDir: 'dist/scripts',
-  format: ['cjs'],
-  dts: false,
-  clean: false,
-  target: 'node18',
 }])
