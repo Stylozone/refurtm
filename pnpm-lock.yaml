@@ -49,8 +49,8 @@ catalogs:
       specifier: ^11.1.5
       version: 11.1.5
     '@phaicom/eslint-config':
-      specifier: ^0.3.5
-      version: 0.3.5
+      specifier: ^0.3.6
+      version: 0.3.6
     '@prisma/client':
       specifier: ^6.12.0
       version: 6.12.0
@@ -164,7 +164,7 @@ importers:
         version: 19.8.1
       '@phaicom/eslint-config':
         specifier: 'catalog:'
-        version: 0.3.5(@vue/compiler-sfc@3.5.17)(eslint-plugin-better-tailwindcss@3.6.3(eslint@9.31.0(jiti@2.4.2))(tailwindcss@4.1.11))(eslint-plugin-format@1.0.1(eslint@9.31.0(jiti@2.4.2)))(jiti@2.4.2)(typescript@5.8.3)
+        version: 0.3.6(@vue/compiler-sfc@3.5.17)(eslint-plugin-better-tailwindcss@3.6.3(eslint@9.31.0(jiti@2.4.2))(tailwindcss@4.1.11))(eslint-plugin-format@1.0.1(eslint@9.31.0(jiti@2.4.2)))(jiti@2.4.2)(typescript@5.8.3)
       dotenv:
         specifier: 'catalog:'
         version: 17.2.0
@@ -1710,8 +1710,8 @@ packages:
   '@paralleldrive/cuid2@2.2.2':
     resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
 
-  '@phaicom/eslint-config@0.3.5':
-    resolution: {integrity: sha512-8ONYe8YeZGmShCxypDiUp2Q6+HjL1RMj+rue8pgFIlQ1pd96Q0oeAKLdpuN9f4jHifURTFrPsKLuKb/+jf7gzw==}
+  '@phaicom/eslint-config@0.3.6':
+    resolution: {integrity: sha512-7qVu6iUsKo7AZ5k5PbNSrH61NigrlPzC0YAyRC5pzipw813lfdpDEsEWGPM4o1i5IkwKmaSrDmAiUSPn+a+6vQ==}
     engines: {node: '>=20'}
     peerDependencies:
       eslint-plugin-better-tailwindcss: '>=3.4.1'
@@ -7404,7 +7404,7 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.8.0
 
-  '@phaicom/eslint-config@0.3.5(@vue/compiler-sfc@3.5.17)(eslint-plugin-better-tailwindcss@3.6.3(eslint@9.31.0(jiti@2.4.2))(tailwindcss@4.1.11))(eslint-plugin-format@1.0.1(eslint@9.31.0(jiti@2.4.2)))(jiti@2.4.2)(typescript@5.8.3)':
+  '@phaicom/eslint-config@0.3.6(@vue/compiler-sfc@3.5.17)(eslint-plugin-better-tailwindcss@3.6.3(eslint@9.31.0(jiti@2.4.2))(tailwindcss@4.1.11))(eslint-plugin-format@1.0.1(eslint@9.31.0(jiti@2.4.2)))(jiti@2.4.2)(typescript@5.8.3)':
     dependencies:
       '@antfu/eslint-config': 4.17.0(@vue/compiler-sfc@3.5.17)(eslint-plugin-format@1.0.1(eslint@9.31.0(jiti@2.4.2)))(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
       eslint: 9.31.0(jiti@2.4.2)
