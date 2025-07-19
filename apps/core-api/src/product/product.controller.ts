@@ -1,10 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Controller, NotFoundException } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 import { PrismaClient } from '@prisma/client'
-import { GetProductBySlugRequest, GetProductRequest, ListProductsRequest, ProductList, ProductResponse, ProductServiceController } from './product'
+import {
+  GetProductBySlugRequest,
+  GetProductRequest,
+  ListProductsRequest,
+  ProductList,
+  ProductResponse,
+  ProductServiceController,
+} from './product'
 
-@Injectable()
-export class ProductServiceImpl implements ProductServiceController {
+@Controller()
+export class ProductController implements ProductServiceController {
   private prisma = new PrismaClient()
 
   @GrpcMethod('ProductService', 'GetProduct')
@@ -16,16 +23,22 @@ export class ProductServiceImpl implements ProductServiceController {
     return { product }
   }
 
+  @GrpcMethod('ProductService', 'GetProductBySlug')
   async getProductBySlug({ slug }: GetProductBySlugRequest): Promise<ProductResponse> {
     const product = await this.prisma.product.findUnique({ where: { slug } })
     if (!product) {
       throw new NotFoundException(`Product with slug "${slug}" not found`)
     }
-
     return { product }
   }
 
-  async listProducts({ category, search, page = 1, limit = 10 }: ListProductsRequest): Promise<ProductList> {
+  @GrpcMethod('ProductService', 'ListProducts')
+  async listProducts({
+    category,
+    search,
+    page = 1,
+    limit = 10,
+  }: ListProductsRequest): Promise<ProductList> {
     const where: any = {}
 
     if (search) {
@@ -40,7 +53,11 @@ export class ProductServiceImpl implements ProductServiceController {
     }
 
     const [products, total] = await Promise.all([
-      this.prisma.product.findMany({ where, skip: (page - 1) * limit, take: limit }),
+      this.prisma.product.findMany({
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
       this.prisma.product.count({ where }),
     ])
 
