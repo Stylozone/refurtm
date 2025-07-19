@@ -22,23 +22,22 @@
     "pt": "pnpm --filter @refurtm/proto build"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.13.4",
-    "@grpc/proto-loader": "^0.7.15",
-    "@grpc/reflection": "^1.0.4",
-    "grpc-health-check": "^2.0.2"
+    "@grpc/grpc-js": "catalog:",
+    "@grpc/proto-loader": "catalog:",
+    "@grpc/reflection": "catalog:",
+    "grpc-health-check": "catalog:"
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@phaicom/eslint-config": "catalog:",
-    "dotenv": "^17.2.0",
+    "dotenv": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "eslint-plugin-format": "catalog:",
     "globals": "catalog:",
     "lint-staged": "catalog:",
     "simple-git-hooks": "catalog:",
-    "ts-proto": "^2.7.5",
     "turbo": "catalog:",
     "typescript": "catalog:"
   },

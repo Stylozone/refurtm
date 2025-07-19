@@ -16,9 +16,12 @@
     "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=gen --ts_proto_opt=nestJs=true,outputServices=grpc-js,env=node --proto_path=src src/*.proto",
     "build": "pnpm generate && tsup"
   },
+  "dependencies": {
+    "@refurtm/tsconfig": "workspace:^"
+  },
   "devDependencies": {
-    "ts-proto": "^2.7.5",
-    "tsup": "^8.5.0",
+    "ts-proto": "catalog:",
+    "tsup": "catalog:",
     "typescript": "catalog:"
   }
 }
