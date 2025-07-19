@@ -13,8 +13,8 @@
     "src/**/*.proto"
   ],
   "scripts": {
-    "build": "tsup",
-    "generate": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=src --ts_proto_opt=nestJs=true,outputServices=grpc-js,useExactTypes=false,env=node --proto_path=src src/*.proto"
+    "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=gen --ts_proto_opt=nestJs=true,outputServices=grpc-js,env=node --proto_path=src src/*.proto",
+    "build": "pnpm generate && tsup"
   },
   "devDependencies": {
     "ts-proto": "^2.7.5",

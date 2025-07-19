@@ -4,7 +4,7 @@ import { globSync } from 'glob'
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'], // or just 'src/product.ts' if no index
+  entry: ['gen/index.ts'], // or just 'src/product.ts' if no index
   outDir: 'dist',
   format: ['esm', 'cjs'],
   dts: true,
