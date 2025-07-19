@@ -2,9 +2,7 @@
   "name": "@refurtm/core-api",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
-  "author": "Reawpai Chunsoi <reawpai.chunsoi@gmail.com>",
-  "license": "MIT",
+  "description": "The main NestJS backend service for the Refurtm platform, handling core API functionality such as products, orders, and user management.",
   "scripts": {
     "build": "nest build",
     "start": "nest start",

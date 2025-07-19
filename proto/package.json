@@ -2,10 +2,7 @@
   "name": "@refurtm/proto",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
-  "description": "Refurbished Tech Marketplace.",
-  "author": "Reawpai Chunsoi <reawpai.chunsoi@gmail.com>",
-  "license": "MIT",
+  "description": "Shared protobuf definitions and generated TypeScript types for gRPC services used across the Refurtm platform.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
