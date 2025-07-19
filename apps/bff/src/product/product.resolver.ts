@@ -1,5 +1,5 @@
 import { Inject, OnModuleInit } from '@nestjs/common'
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 import { ClientGrpc } from '@nestjs/microservices'
 import {
   GQLModels,
@@ -23,8 +23,8 @@ export class ProductResolver implements OnModuleInit {
   async products(
     @Args('category', { nullable: true }) category?: string,
     @Args('search', { nullable: true }) search?: string,
-    @Args('page', { type: () => Number, defaultValue: 1 }) page = 1,
-    @Args('limit', { type: () => Number, defaultValue: 10 }) limit = 10,
+    @Args('page', { type: () => Int, defaultValue: 1 }) page = 1,
+    @Args('limit', { type: () => Int, defaultValue: 10 }) limit = 10,
   ): Promise<GQLModels.ProductList> {
     const req: ListProductsRequest = {
       category: category ?? '',
@@ -34,6 +34,9 @@ export class ProductResolver implements OnModuleInit {
     }
 
     const res = await firstValueFrom(this.productService.listProducts(req))
-    return res
+    return {
+      products: res.products ?? [],
+      total: res.total ?? 0,
+    }
   }
 }

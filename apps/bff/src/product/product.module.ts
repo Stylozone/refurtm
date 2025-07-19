@@ -11,7 +11,7 @@ import { ProductResolver } from './product.resolver'
         options: {
           package: 'product',
           protoPath: require.resolve('@refurtm/proto/dist/product.proto'),
-          url: '0.0.0.0:50051',
+          url: process.env.GRPC_SERVER_URL || '0.0.0.0:50051',
         },
       },
     ]),

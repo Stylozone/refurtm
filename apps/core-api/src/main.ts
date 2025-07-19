@@ -14,7 +14,7 @@ async function bootstrap() {
         healthCheckProtoPath,
         require.resolve('@refurtm/proto/dist/product.proto'),
       ],
-      url: '0.0.0.0:50051',
+      url: `0.0.0.0:${process.env.GRPC_PORT}`,
       onLoadPackageDefinition: (pkg, server) => {
         new ReflectionService(pkg).addToServer(server)
         const healthImpl = new HealthImplementation({
