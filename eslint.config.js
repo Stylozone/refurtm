@@ -15,7 +15,7 @@ configs(
     },
   },
   {
-    files: ['./apps/core-api/**/*.{js,ts}'],
+    files: ['./apps/core-api/**/*.{js,ts}', './apps/bff/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -23,8 +23,11 @@ configs(
       },
       sourceType: 'commonjs',
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: join(import.meta.dirname, './apps/core-api'),
+        project: [
+          './apps/core-api/tsconfig.json',
+          './apps/bff/tsconfig.json',
+        ],
+        tsconfigRootDir: join(import.meta.dirname, './'),
       },
     },
     rules: {
