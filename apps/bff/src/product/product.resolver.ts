@@ -2,6 +2,8 @@ import { Inject, OnModuleInit } from '@nestjs/common'
 import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 import { ClientGrpc } from '@nestjs/microservices'
 import {
+  GetProductBySlugRequest,
+  GetProductRequest,
   GQLModels,
   ListProductsRequest,
   ProductServiceClient,
@@ -38,5 +40,19 @@ export class ProductResolver implements OnModuleInit {
       products: res.products ?? [],
       total: res.total ?? 0,
     }
+  }
+
+  @Query(() => GQLModels.Product, { nullable: true })
+  async productById(@Args('id') id: string): Promise<GQLModels.Product | null> {
+    const req: GetProductRequest = { id }
+    const res = await firstValueFrom(this.productService.getProduct(req))
+    return res.product ?? null
+  }
+
+  @Query(() => GQLModels.Product, { nullable: true })
+  async productBySlug(@Args('slug') slug: string): Promise<GQLModels.Product | null> {
+    const req: GetProductBySlugRequest = { slug }
+    const res = await firstValueFrom(this.productService.getProductBySlug(req))
+    return res.product ?? null
   }
 }

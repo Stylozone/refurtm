@@ -20,18 +20,6 @@
       "dependsOn": [
         "^test"
       ]
-    },
-    "db:gen": {
-      "cache": false,
-      "dependsOn": [
-        "^db:gen"
-      ]
-    },
-    "db:seed": {
-      "cache": false,
-      "dependsOn": [
-        "^db:seed"
-      ]
     }
   }
 }

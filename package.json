@@ -9,6 +9,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "turbo run dev",
+    "dev:core": "pnpm --filter @refurtm/core-api dev",
+    "dev:bff": "pnpm --filter @refurtm/bff dev",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "eslint .",
@@ -17,8 +19,8 @@
     "db:up": "docker compose -f infra/docker-compose.yml up -d",
     "db:down": "docker compose -f infra/docker-compose.yml down",
     "db:restart": "npm run dev:down && npm run dev:up",
-    "db:gen": "turbo run db:gen",
-    "db:seed": "turbo run db:seed",
+    "db:gen": "pnpm --filter @refurtm/core-api db:gen",
+    "db:seed": "pnpm --filter @refurtm/core-api db:seed",
     "pt": "pnpm --filter @refurtm/proto build"
   },
   "dependencies": {
@@ -32,6 +34,7 @@
     "@commitlint/config-conventional": "catalog:",
     "@phaicom/eslint-config": "catalog:",
     "dotenv": "catalog:",
+    "dotenv-cli": "^8.0.0",
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "eslint-plugin-format": "catalog:",
