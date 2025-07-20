@@ -3,14 +3,15 @@ import type {
 } from '@refurtm/proto'
 import { Controller, NotFoundException } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import {
   Product,
 } from '@refurtm/proto'
+import { PrismaService } from '../prisma/prisma.service'
 
 @Controller()
 export class ProductController implements ProductType.ProductServiceController {
-  private prisma = new PrismaClient()
+  constructor(private prisma: PrismaService) {}
 
   @GrpcMethod('ProductService', 'GetProduct')
   async getProduct({ id }: Product.GetProductRequest): Promise<Product.ProductResponse> {

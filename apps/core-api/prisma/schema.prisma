@@ -17,3 +17,19 @@ model Product {
   category    String
   slug        String  @unique
 }
+
+model Order {
+  id         String      @id @default(uuid())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  status     String
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  productId String
+  quantity  Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+}

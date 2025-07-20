@@ -9,10 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.GRPC,
     options: {
-      package: 'product',
+      package: ['product', 'order'],
       protoPath: [
         healthCheckProtoPath,
         require.resolve('@refurtm/proto/dist/product.proto'),
+        require.resolve('@refurtm/proto/dist/order.proto'),
       ],
       url: `0.0.0.0:${process.env.GRPC_PORT}`,
       onLoadPackageDefinition: (pkg, server) => {
