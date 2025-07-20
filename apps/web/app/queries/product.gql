@@ -1,0 +1,28 @@
+query Products($category: String, $search: String, $page: Int = 1, $limit: Int = 10) {
+  products(category: $category, search: $search, page: $page, limit: $limit) {
+    total
+    products {
+      id
+      title
+      description
+      price
+      imageUrl
+      condition
+      category
+      slug
+    }
+  }
+}
+
+query ProductBySlug($slug: String!) {
+  productBySlug(slug: $slug) {
+    id
+    title
+    description
+    price
+    imageUrl
+    condition
+    category
+    slug
+  }
+}
