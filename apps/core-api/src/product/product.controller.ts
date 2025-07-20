@@ -1,21 +1,19 @@
+import type {
+  Product as ProductType,
+} from '@refurtm/proto'
 import { Controller, NotFoundException } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 import { Prisma, PrismaClient } from '@prisma/client'
 import {
-  GetProductBySlugRequest,
-  GetProductRequest,
-  ListProductsRequest,
-  ProductList,
-  ProductResponse,
-  ProductServiceController,
+  Product,
 } from '@refurtm/proto'
 
 @Controller()
-export class ProductController implements ProductServiceController {
+export class ProductController implements ProductType.ProductServiceController {
   private prisma = new PrismaClient()
 
   @GrpcMethod('ProductService', 'GetProduct')
-  async getProduct({ id }: GetProductRequest): Promise<ProductResponse> {
+  async getProduct({ id }: Product.GetProductRequest): Promise<Product.ProductResponse> {
     const product = await this.prisma.product.findUnique({ where: { id } })
     if (!product) {
       throw new NotFoundException(`Product with ID ${id} not found`)
@@ -24,7 +22,7 @@ export class ProductController implements ProductServiceController {
   }
 
   @GrpcMethod('ProductService', 'GetProductBySlug')
-  async getProductBySlug({ slug }: GetProductBySlugRequest): Promise<ProductResponse> {
+  async getProductBySlug({ slug }: Product.GetProductBySlugRequest): Promise<Product.ProductResponse> {
     const product = await this.prisma.product.findUnique({ where: { slug } })
     if (!product) {
       throw new NotFoundException(`Product with slug "${slug}" not found`)
@@ -38,7 +36,7 @@ export class ProductController implements ProductServiceController {
     search,
     page = 1,
     limit = 10,
-  }: ListProductsRequest): Promise<ProductList> {
+  }: Product.ListProductsRequest): Promise<Product.ProductList> {
     const where: Prisma.ProductWhereInput = {}
 
     if (search) {
