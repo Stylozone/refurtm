@@ -1,0 +1,22 @@
+syntax = "proto3";
+package order;
+
+message CheckoutRequest {
+  repeated OrderItem items = 1;
+}
+
+message OrderItem {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message CheckoutResponse {
+  string orderId = 1;
+  string status = 2;
+}
+
+// --- gRPC Service ---
+
+service OrderService {
+  rpc Checkout (CheckoutRequest) returns (CheckoutResponse);
+}
