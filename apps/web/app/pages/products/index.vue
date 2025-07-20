@@ -2,7 +2,7 @@
 const route = useRoute()
 const router = useRouter()
 
-const page = useState('productPage', () => Number(route.query.page) || 1)
+const page = ref(Number(route.query.page) || 1)
 const limit = 6
 
 const { data, error, pending, refresh } = await useAsyncGql({
@@ -96,39 +96,28 @@ watch(
       </div>
       <!-- Pagination -->
       <div class="flex justify-center gap-4">
-        <button
-          class="
-            rounded bg-gray-100 px-4 py-2
-            hover:bg-gray-200
-          "
+        <Button
+          class="rounded px-4 py-2"
           :disabled="page === 1"
           @click="prevPage"
         >
           Previous
-        </button>
+        </Button>
         <!-- Page numbers -->
-        <button
+        <Button
           v-for="p in totalPage"
           :key="p"
-          class="rounded px-3 py-2" :class="[
-            page === p ? 'bg-black text-white' : `
-              bg-gray-100
-              hover:bg-gray-200
-            `,
-          ]"
+          class="rounded px-3 py-2" :variant="page === p ? 'default' : 'outline'"
           @click="goToPage(p)"
         >
           {{ p }}
-        </button>
-        <button
-          class="
-            rounded bg-gray-100 px-4 py-2
-            hover:bg-gray-200
-          "
+        </Button>
+        <Button
+          class="rounded px-4 py-2"
           @click="nextPage"
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   </div>

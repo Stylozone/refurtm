@@ -26,3 +26,16 @@ query ProductBySlug($slug: String!) {
     slug
   }
 }
+
+query ProductById($id: String!) {
+  productById(id: $id) {
+    id
+    title
+    description
+    price
+    imageUrl
+    condition
+    category
+    slug
+  }
+}

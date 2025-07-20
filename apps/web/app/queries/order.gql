@@ -1,0 +1,6 @@
+mutation Checkout($items: [OrderItemInput!]!) {
+  checkout(items: $items) {
+    orderId
+    status
+  }
+}

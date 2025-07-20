@@ -2,7 +2,6 @@
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const page = useState<number>('productPage')
 
 const { data, error } = await useAsyncGql({
   operation: 'ProductBySlug',
@@ -18,14 +17,9 @@ const product = computed(() => data.value?.productBySlug ?? null)
 
 <template>
   <div class="p-6">
-    <NuxtLink
-      :to="{
-        path: '/products',
-        query: { page },
-      }" class="text-blue-500 underline"
-    >
-      Back
-    </NuxtLink>
+    <Button variant="outline" class="underline" @click="$router.back()">
+      ← Back
+    </Button>
     <div v-if="product" class="mt-4 rounded-xl border p-6 shadow">
       <img
         :src="product.imageUrl" class="mb-4 h-64 w-full rounded-lg object-cover"
@@ -42,6 +36,15 @@ const product = computed(() => data.value?.productBySlug ?? null)
       <p class="mt-2 text-sm text-gray-500">
         Condition: {{ product.condition }}
       </p>
+      <NuxtLink
+        class="
+          mt-4 inline-block rounded bg-black px-4 py-2 text-white
+          hover:bg-gray-800
+        "
+        :to="`/checkout?productId=${product.id}`"
+      >
+        Checkout
+      </NuxtLink>
     </div>
   </div>
 </template>
